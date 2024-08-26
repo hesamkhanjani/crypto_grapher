@@ -1,6 +1,6 @@
-const input = require('inquirer');
-const fs = require('fs');
-require('colors');
+import input from 'inquirer';
+import fs from 'fs';
+import 'colors';
 
 const mediaArray = ["Hash", "CryptoGrapher"];
 var num = 0;
