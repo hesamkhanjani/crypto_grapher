@@ -15,104 +15,95 @@ input.prompt(
       message:'inter name file: ',
     },
   ],
-)
-.then((answer) =>{
+).then((answer) =>{
     readFile(answer.FILE);
-  })
-
+})
 
 
    //              read file user
-function readFile(namefile){
-NameFile = namefile;
-          fs.readFile(namefile , (err , data)=>{
-            if(err) throw err;
+function readFile(namefile) {
+  NameFile = namefile;
 
-            contentfile = data.toString();
- start();
-})
-       
+  fs.readFile(namefile , (err , data)=>{
+    if(err) throw err;
+
+    contentfile = data.toString();
+    start();
+  })      
 }
 
 function start(){
-  
-input
-  .prompt([
-    {
-      name: "doyou",
-      type: 'list',
-      message: "What each? ",
-      choices: mediaArray,
-      
-    },
-  ])
-  .then((answer) => {
-   if(answer.doyou == 'Hash'){
-    doHash()
-   }else{
-    doCryptoGrapher();
-   }
-  });
+    
+  input.prompt([
+      {
+        name: "doyou",
+        type: 'list',
+        message: "What each? ",
+        choices: mediaArray,
+        
+      },
+  ]).then((answer) => {
+      if (answer.doyou == 'Hash') {
+
+        doHash()
+      } else {
+
+        doCryptoGrapher();
+      }
+    });
 }
 
 function doHash(){ 
-input.prompt(
-    [
-      
+
+  input.prompt([
         {
           name: "xor",
           type: "number",
           message: "what number for HASH ? ",
         },
-      ],
-      ) .then(answer => {  
-   hasher(answer.xor)
-        
+      ],).then(answer => {  
+
+            hasher(answer.xor)
       })
-    }
+}
 function hasher(number) {
 
-    for (var i = 0;i < contentfile.length;i++) {
+  for (var i = 0;i < contentfile.length;i++) {
 
-  hash += ((contentfile.charCodeAt(num).toString(2)) ^ number).toString() + '#@#';
+    hash += ((contentfile.charCodeAt(num).toString(2)) ^ number).toString() + '#@#';
     num++;
-    }
-fs.writeFile('HASH-'+NameFile , hash , (err)=>{
-  if(err) throw err;
-  console.log('OK' .rainbow);
+  }
 
-})
+  fs.writeFile('HASH-'+NameFile , hash , (err)=>{
+    if(err) throw err;
+
+    console.log('OK' .rainbow);
+  })
 }
 function doCryptoGrapher(){
-input.prompt(
-  [
-    
+  input.prompt([
       {
         name: "crypto",
         type: "number",
         message: "what number for CryptoGrapher ? ",
       },
-    ],
-    ) .then(answer => {
+    ],).then(answer => {
     
-     
-    cryptoGrapher(answer.crypto)
-      
-    })
-  
-  }
+          cryptoGrapher(answer.crypto)  
+  })
+}
 function cryptoGrapher(number) {
-cuter = contentfile.split('#@#')
-for (var i = 0; i < contentfile.length; i++) {
+  cuter = contentfile.split('#@#')
 
-  unHashCryptoGrapher += String.fromCharCode( parseInt( parseInt(cuter[indexArray]) ^ number , 2 ) ) ;
- 
-indexArray++
-    }
-    fs.writeFile('CryptoGrapher-'+NameFile , unHashCryptoGrapher , (err)=>{
-      if(err) throw err;
-      
-      console.log('OK' .rainbow);
+  for (var i = 0; i < contentfile.length; i++) {
 
-    })
+    unHashCryptoGrapher += String.fromCharCode( parseInt( parseInt(cuter[indexArray]) ^ number , 2 ) ) ;
+    indexArray++
+  }
+  
+  fs.writeFile('CryptoGrapher-'+NameFile , unHashCryptoGrapher , (err)=>{
+    if(err) throw err;
+    
+    console.log('OK' .rainbow);
+  })
 }
