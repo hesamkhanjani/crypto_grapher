@@ -3,8 +3,7 @@ import fs from 'fs';
 import 'colors';
 
 const mediaArray = ["Hash", "CryptoGrapher"];
-var num = 0;
-var cuter , indexArray = 0 , unHashCryptoGrapher = ''  , contentfile = '' , NameFile = '';
+var cuter , unHashCryptoGrapher = ''  , contentfile = '' , NameFile = '';
 var hash = '';  
 
 input.prompt(
@@ -20,7 +19,7 @@ input.prompt(
 })
 
 
-   //              read file user
+
 function readFile(namefile) {
   NameFile = namefile;
 
@@ -68,13 +67,16 @@ function doHash(){
 }
 function hasher(number) {
 
-  for (var i = 0;i < contentfile.length;i++) {
+  for (var i = 0; i < contentfile.length; i++) {
 
-    hash += ((contentfile.charCodeAt(num).toString(2)) ^ number).toString() + '#@#';
-    num++;
+    if(i < contentfile.length - 1){
+      hash += parseInt(contentfile.charCodeAt(i) ^ number).toString(2) + '#@#'  
+    }else {
+      hash += parseInt(contentfile.charCodeAt(i) ^ number).toString(2)
+    }
   }
 
-  fs.writeFile('HASH-'+NameFile , hash , (err)=>{
+  fs.writeFile(NameFile , hash , (err)=>{
     if(err) throw err;
 
     console.log('OK' .rainbow);
@@ -95,13 +97,14 @@ function doCryptoGrapher(){
 function cryptoGrapher(number) {
   cuter = contentfile.split('#@#')
 
-  for (var i = 0; i < contentfile.length; i++) {
+  for (var i of cuter ) {
 
-    unHashCryptoGrapher += String.fromCharCode( parseInt( parseInt(cuter[indexArray]) ^ number , 2 ) ) ;
-    indexArray++
+   
+    unHashCryptoGrapher += String.fromCharCode(parseInt(i , 2) ^ number)
+    
   }
   
-  fs.writeFile('CryptoGrapher-'+NameFile , unHashCryptoGrapher , (err)=>{
+  fs.writeFile(NameFile , unHashCryptoGrapher , (err)=>{
     if(err) throw err;
     
     console.log('OK' .rainbow);
