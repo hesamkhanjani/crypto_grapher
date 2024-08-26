@@ -1,5 +1,5 @@
 # encryption file
-You can encrypt the file with your own number.
+You can encrypt and decrypt the file with your own number.
 ## needs
 - Node.js(v20.14.0)
   - inquirer
